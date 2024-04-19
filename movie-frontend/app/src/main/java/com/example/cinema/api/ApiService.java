@@ -1,6 +1,8 @@
 package com.example.cinema.api;
 
+import com.example.cinema.model.ApiResponse;
 import com.example.cinema.model.Currency;
+import com.example.cinema.model.Register;
 import com.example.cinema.model.SignIn;
 import com.example.cinema.model.SignInReponse;
 import com.google.gson.Gson;
@@ -29,5 +31,7 @@ public interface ApiService {
     @GET("api/movies/{id}")
     Call<Currency> getMoviebyId(@Path("id") int id);
     @POST("api/login")
-    Call<SignIn> loginUsers(@Body SignIn signIn);
+    Call<ApiResponse> loginUsers(@Body SignIn signIn);
+    @POST("api/register")
+    Call<Register> registerUsers(@Body Register register);
 }

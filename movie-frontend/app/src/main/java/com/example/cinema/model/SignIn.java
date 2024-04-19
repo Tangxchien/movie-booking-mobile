@@ -1,16 +1,8 @@
 package com.example.cinema.model;
 
 public class SignIn {
-    private String name;
+    private String phone;
     private String password;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getPassword() {
         return password;
@@ -20,8 +12,16 @@ public class SignIn {
         this.password = password;
     }
 
-    public SignIn(String name, String password) {
-        this.name = name;
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public SignIn(String phone, String password) {
+        this.phone = phone;
         this.password = password;
     }
 }

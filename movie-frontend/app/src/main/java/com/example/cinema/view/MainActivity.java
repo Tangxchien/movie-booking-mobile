@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         ApiService.apiService.getMoviebyId(1).enqueue(new Callback<Currency>() {
             @Override
             public void onResponse(Call<Currency> call, Response<Currency> response) {
-                Toast.makeText(MainActivity.this, "Call success", Toast.LENGTH_SHORT).show();
 
                 Currency currency = response.body();
                 if (currency != null) {
