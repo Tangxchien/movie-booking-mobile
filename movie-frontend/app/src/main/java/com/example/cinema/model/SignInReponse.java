@@ -12,6 +12,15 @@ public class SignInReponse {
     private String password;
     private LocalDate birthday;
 
+    public SignInReponse(String name, String phone, String email, String gender, String password, LocalDate birthday) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.password = password;
+        this.birthday = birthday;
+    }
+
     public int getId() {
         return id;
     }

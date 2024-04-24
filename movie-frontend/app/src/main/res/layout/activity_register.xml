@@ -6,11 +6,11 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/edName"
+        android:id="@+id/registerName"
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Họ và tên"
@@ -21,12 +21,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/edPhone"
+        android:id="@+id/registerPhone"
         android:layout_width="280dp"
         android:layout_height="48dp"
-        android:layout_marginStart="101dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="101dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Số điện thoại"
         android:inputType="text"
@@ -34,76 +34,121 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edName" />
+        app:layout_constraintTop_toBottomOf="@+id/registerName" />
 
     <EditText
-        android:id="@+id/edEmail"
+        android:id="@+id/registerEmail"
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="101dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="text"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPhone" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPhone" />
 
     <EditText
-        android:id="@+id/edPassword"
+        android:id="@+id/registerPassword"
         android:layout_width="280dp"
         android:layout_height="48dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="101dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Mật khẩu"
         android:inputType="textPassword"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/registerEmail" />
 
-    <RadioButton
-        android:id="@+id/rbConfirm"
-        android:layout_width="wrap_content"
+    <RadioGroup
+        android:id="@+id/registerGender"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="67dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="76dp"
-        android:text="Tôi đồng ý với các điều khoản cá nhân"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:orientation="horizontal"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPassword">
+        <RadioButton
+            android:id="@+id/registerMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nam" />
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="240dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="158dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="48dp"
-        android:background="@drawable/btn_radius"
-        android:text="ĐĂNG KÍ TÀI KHOẢN"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <RadioButton
+            android:id="@+id/registerFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nữ" />
 
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginEnd="133dp"
-        android:layout_marginBottom="90dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    </RadioGroup>
+<!--    <EditText-->
+<!--        android:id="@+id/registerBirthday"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="Ngày sinh"-->
+<!--        android:layout_marginStart="100dp"-->
+<!--        android:layout_marginTop="25dp"-->
+<!--        android:layout_marginEnd="100dp"-->
+<!--        android:inputType="date"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/registerGender"/>-->
+    <DatePicker
+        android:id="@+id/registerBirthday"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="70dp"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerGender" />
+        <RadioButton
+            android:id="@+id/registerConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+            android:text="Tôi đồng ý với các điều khoản cá nhân"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerBirthday" />
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="240dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="158dp"
+            android:layout_marginEnd="159dp"
+            android:layout_marginBottom="48dp"
+            android:background="@drawable/btn_radius"
+            android:text="ĐĂNG KÍ TÀI KHOẢN"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <!--    <EditText-->
+<!--        android:id="@+id/editTextDate"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="68dp"-->
+<!--        android:layout_marginEnd="133dp"-->
+<!--        android:layout_marginBottom="90dp"-->
+<!--        android:ems="10"-->
+<!--        android:inputType="date"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/btnRegister"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
