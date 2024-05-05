@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -13,9 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cinema.R;
 import com.example.cinema.api.ApiService;
 import com.example.cinema.model.ApiResponse;
-import com.example.cinema.model.Currency;
 import com.example.cinema.model.SignIn;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 

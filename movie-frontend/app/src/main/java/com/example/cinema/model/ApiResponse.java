@@ -1,14 +1,14 @@
 package com.example.cinema.model;
 
-public class ApiResponse {
+public class ApiResponse<T> {
     private String status;
-    private Object data;
+    private T data;
     private String message;
 
     public ApiResponse() {
     }
 
-    public ApiResponse(String status, Object data, String message) {
+    public ApiResponse(String status, T data, String message) {
         this.status = status;
         this.data = data;
         this.message = message;
@@ -22,11 +22,11 @@ public class ApiResponse {
         this.status = status;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 

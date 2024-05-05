@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginEnd="64dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="titlte"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="27dp" />
+
+    <TextView
+        android:id="@+id/tvActors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Actors:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="227dp"
+        tools:layout_editor_absoluteY="327dp" />
+
+    <TextView
+        android:id="@+id/tvDescriptionK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="119dp"
+        android:text="Nội dung: "
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintStart_toEndOf="@+id/imgMovie"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgMovie"
+        android:layout_width="172dp"
+        android:layout_height="223dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="202dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDescriptionV"
+        android:layout_width="139dp"
+        android:layout_height="142dp"
+        android:text="Noi dung nhay cam"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="227dp"
+        tools:layout_editor_absoluteY="158dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,54 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginEnd="163dp"
-        android:layout_marginBottom="177dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="219dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="192dp"
-        android:layout_marginBottom="580dp"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-        android:id="@+id/tvDirector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="192dp"
-        android:layout_marginEnd="253dp"
-        android:text=""
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_movies"
+        android:layout_width="401dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="248dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvActors"
+    <Button
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="159dp"
-        android:layout_marginEnd="252dp"
-        android:layout_marginBottom="455dp"
-        android:text=""
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="163dp"
+        android:layout_marginBottom="56dp"
+        android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="72dp"
+        android:text="Đặt vé"
+        app:layout_constraintBottom_toTopOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
