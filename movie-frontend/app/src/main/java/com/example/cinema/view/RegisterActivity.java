@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,6 +23,8 @@ import com.example.cinema.model.SignInReponse;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,9 +32,10 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
-    private EditText registerName, registerPhone, registerEmail, registerBirthday, registerPassword;
+    private EditText registerName, registerPhone, registerEmail, registerPassword;
     private RadioGroup registerGender;
     private RadioButton registerMale;
+    private DatePicker registerBirthday;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerEmail = findViewById(R.id.registerEmail);
         registerBirthday = findViewById(R.id.registerBirthday);
         registerGender = findViewById(R.id.registerGender);
+        registerMale = findViewById(R.id.registerMale);
         registerPassword = findViewById(R.id.registerPassword);
         btnRegister.setOnClickListener(v -> {
             checkRegister();
@@ -53,8 +58,14 @@ public class RegisterActivity extends AppCompatActivity {
         String email = String.valueOf(registerEmail.getText());
         String password = String.valueOf(registerPassword.getText());
         String gender = registerMale.isChecked() ? "Male" : "Female";
-        String birthdayString = String.valueOf(registerBirthday.getText());
-        LocalDate birthday = LocalDate.parse(birthdayString);
+        DatePicker datePicker = findViewById(R.id.registerBirthday);
+
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year = datePicker.getYear();
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        Date birthday = calendar.getTime();
 
         Register register = new Register( name, phone, email, gender, password, birthday);
         ApiService.apiService.registerUsers(register).enqueue(new Callback<ApiResponse>() {

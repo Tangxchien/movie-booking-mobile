@@ -34,4 +34,10 @@ public interface ApiService {
     Call<ApiResponse> loginUsers(@Body SignIn signIn);
     @POST("api/register")
     Call<ApiResponse> registerUsers(@Body Register register);
+    @POST("api/update-account/{id}")
+    Call<ApiResponse> editUsers(@Path("id") int id, @Body Register register);
+    @GET("api/change-password/{accountId}/{oldPassword}/{newPassword}")
+    Call<ApiResponse> changePassword(@Path("accountId") int accountId, @Path("oldPassword") int oldPassword, @Path("newPassword") int newPassword);
+    @GET("api/get-tickets-by-account/{accountId}")
+    Call<ApiResponse> getTicketByAccountId(@Path("accountId") int accountId);
 }
