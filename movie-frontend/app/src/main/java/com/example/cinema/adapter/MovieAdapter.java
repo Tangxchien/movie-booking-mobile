@@ -46,10 +46,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             return;
         }
         holder.tvTitle.setText(movie.getTitle());
-//        holder.tvActor.setText(movie.getActors());
-//        holder.tvDirector.setText(movie.getDirector());
-//        holder.tvDescription.setText(movie.getDescription());
-//        holder.tvPrice.setText(String.valueOf(movie.getPrice()));
         Picasso.get().load(movie.getImage()).placeholder(R.drawable.ic_launcher_background).into(holder.imgMovie);
     }
 
@@ -62,15 +58,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder{
-        private TextView tvTitle, tvDescription, tvActor, tvPrice, tvDirector;
+        private TextView tvTitle;
         private ImageView imgMovie;
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
             imgMovie = itemView.findViewById(R.id.imgMovie);
-//            tvActor = itemView.findViewById(R.id.tvActor);
-//            tvDescription = itemView.findViewById(R.id.tvDescription);
-//            tvDirector = itemView.findViewById(R.id.tvDirector);
-//            tvPrice = itemView.findViewById(R.id.tvPrice);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             itemView.setOnClickListener(v -> {
                 onClickItem.onClickItem(getAdapterPosition());

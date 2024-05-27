@@ -15,20 +15,26 @@ import com.example.cinema.model.Movie;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MovieDetailActivity extends AppCompatActivity {
-    TextView tvId, tvTitle, tvActors;
+    TextView tvTitle, tvActorsV, tvDescriptionV, tvAgeLimitV, tvReleaseDateV, tvDirectorV;
     ImageView imgMovie;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
-        tvId = findViewById(R.id.tvId);
-        tvActors = findViewById(R.id.tvActors);
+        tvDescriptionV = findViewById(R.id.tvDescriptionV);
+        tvActorsV = findViewById(R.id.tvActorsV);
         tvTitle = findViewById(R.id.tvTitle);
+        tvAgeLimitV = findViewById(R.id.tvAgeLimitV);
+        tvReleaseDateV = findViewById(R.id.tvReleaseDateV);
+        tvDirectorV = findViewById(R.id.tvDirectorV);
         imgMovie = findViewById(R.id.imgMovie);
         int id = getIntent().getIntExtra("id", 0);
         callApiGetMovieById(id);
@@ -39,9 +45,13 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiResponse<Movie>> call, Response<ApiResponse<Movie>> response) {
                 Movie movie = response.body().getData();
-                tvId.setText(movie.getId().toString());
-                tvTitle.setText(movie.getTitle());
-                tvActors.setText(movie.getActors());
+                tvDescriptionV.setText(movie.getDescription());
+                tvTitle.setText(movie.getTitle().toUpperCase());
+                tvActorsV.setText(movie.getActors());
+                tvAgeLimitV.setText("Phim dành cho khán giả trên " + String.valueOf(movie.getAgeLimit()) + " tuổi");
+                tvDirectorV.setText(movie.getDirector());
+                Date releaseDate = movie.getReleaseDate();
+                tvReleaseDateV.setText(releaseDate.getDay() + " tháng " + releaseDate.getMonth() + ", " + (releaseDate.getYear() + 1900));
                 Picasso.get().load(movie.getImage()).into(imgMovie);
 //                new AlertDialog.Builder(MoieDetailActivity.this).setMessage().show();
             }

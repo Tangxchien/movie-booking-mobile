@@ -1,11 +1,33 @@
 package com.example.cinema.model;
 
+
+import java.util.Date;
+
 public class Movie {
     private Integer id;
     private String image;
     private String title;
     private String description;
     private String director;
+    private Date releaseDate;
+    private int ageLimit;
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public int getAgeLimit() {
+        return ageLimit;
+    }
+
+    public void setAgeLimit(int ageLimit) {
+        this.ageLimit = ageLimit;
+    }
+
     private String actors;
     private float price;
     public String getImage() {
@@ -64,13 +86,15 @@ public class Movie {
         this.price = price;
     }
 
-    public Movie(Integer id, String title, String description, String director, String actors, int price, String image) {
-        this.title = title;
+    public Movie(Integer id, String image, String title, String description, String director, Date releaseDate, int ageLimit, String actors, float price) {
         this.id = id;
+        this.image = image;
+        this.title = title;
         this.description = description;
         this.director = director;
+        this.releaseDate = releaseDate;
+        this.ageLimit = ageLimit;
         this.actors = actors;
         this.price = price;
-        this.image = image;
     }
 }

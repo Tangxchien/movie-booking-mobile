@@ -7,52 +7,154 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginEnd="64dp"
+        android:layout_width="334dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="25dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="titlte"
+        android:text="titlrrgtyjfdhutjfhutgkuyttkihfgfthjuuyflutysfjuyfkj"
         android:textColor="@color/black"
         android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imgMovie"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="27dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/tvActors"
+        android:id="@+id/tvActorsK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Actors:"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="309dp"
+        android:layout_marginBottom="18dp"
+        android:text="Diễn viên"
         android:textColor="@color/black"
-        android:textSize="20dp"
-        tools:layout_editor_absoluteX="227dp"
-        tools:layout_editor_absoluteY="327dp" />
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvActorsV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDirectorK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="311dp"
+        android:layout_marginBottom="14dp"
+        android:text="Đạo diễn"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvDirectorV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvReleaseateDateK"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="32dp"
+        android:text="Khởi chiếu"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvReleaseDateV"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgMovie" />
+
+    <TextView
+        android:id="@+id/tvAgeLimitK"
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="12dp"
+        android:text="Phân loại"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tvDirectorK"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvReleaseateDateK"
+        app:layout_constraintVertical_bias="0.044" />
+
+    <TextView
+        android:id="@+id/tvActorsV"
+        android:layout_width="309dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="40dp"
+        android:text="Diễn viên"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBookTicket"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAgeLimitV"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Phân loại giới hạn tuổi"
+        android:textColor="#FF0000"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/tvAgeLimitK"
+        app:layout_constraintTop_toBottomOf="@+id/tvReleaseDateV" />
+
+    <TextView
+        android:id="@+id/tvReleaseDateV"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="156dp"
+        android:text="21 tháng 03, 2024"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescriptionV" />
+
+    <TextView
+        android:id="@+id/tvDirectorV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="15dp"
+        android:text="Đạo diễn"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvActorsK"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvDescriptionK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="96dp"
         android:layout_marginEnd="119dp"
-        android:text="Nội dung: "
+        android:text="Nội dung"
         android:textColor="@color/black"
         android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        app:layout_constraintHorizontal_bias="0.677"
         app:layout_constraintStart_toEndOf="@+id/imgMovie"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgMovie"
         android:layout_width="172dp"
         android:layout_height="223dp"
         android:layout_marginStart="34dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="202dp"
+        app:shapeAppearanceOverlay="@style/radius"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,9 +164,25 @@
         android:id="@+id/tvDescriptionV"
         android:layout_width="139dp"
         android:layout_height="142dp"
+        android:layout_marginTop="140dp"
         android:text="Noi dung nhay cam"
         android:textColor="@color/black"
         android:textSize="16dp"
-        tools:layout_editor_absoluteX="227dp"
-        tools:layout_editor_absoluteY="158dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toEndOf="@+id/imgMovie"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBookTicket"
+        android:layout_width="259dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="32dp"
+        android:text="Đặt vé"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
