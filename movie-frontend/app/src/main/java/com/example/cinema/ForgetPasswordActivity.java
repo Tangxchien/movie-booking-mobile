@@ -1,18 +1,20 @@
-package com.example.cinema.view;
+package com.example.cinema;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.cinema.R;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
 import com.example.cinema.api.ApiService;
 import com.example.cinema.model.ApiResponse;
+import com.example.cinema.model.ForgotPasswordRequest;
 
 import java.io.IOException;
 
@@ -20,57 +22,56 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChangePasswordActivity extends AppCompatActivity {
-    private EditText editCurrentPassword, editNewPassword, editConfirmPassword;
-    private Button btnChangePassword;
-    private SharedPreferences sharedPreferences;
+public class ForgetPasswordActivity extends AppCompatActivity {
 
+    private EditText editPhone, editEmail, editNewPassword, editConfirmPassword;
+    private Button btnSubmit, btnBackToLogin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_password);
-        editCurrentPassword = findViewById(R.id.editPassword);
+        setContentView(R.layout.activity_forget_password);
+
+        editPhone = findViewById(R.id.editPhone);
+        editEmail = findViewById(R.id.editEmail);
         editNewPassword = findViewById(R.id.editNewPassword);
         editConfirmPassword = findViewById(R.id.editConfirmPassword);
-        btnChangePassword = findViewById(R.id.btnChangePassword);
-        sharedPreferences = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        btnBackToLogin = findViewById(R.id.btnBackToLogin);
 
-        btnChangePassword.setOnClickListener(v -> {
-            changePassword();
-        });
+        btnSubmit.setOnClickListener(v -> submitForgotPassword());
+        btnBackToLogin.setOnClickListener(v -> finish());
     }
 
-    private void changePassword() {
-        String currentPassword = editCurrentPassword.getText().toString().trim();
-        String newPassword = editNewPassword.getText().toString().trim();
-        String confirmPassword = editConfirmPassword.getText().toString().trim();
+    private void submitForgotPassword() {
+        String phone = editPhone.getText().toString();
+        String email = editEmail.getText().toString();
+        String newPassword = editNewPassword.getText().toString();
+        String confirmPassword = editConfirmPassword.getText().toString();
+
         if (!newPassword.equals(confirmPassword)) {
             new AlertDialog.Builder(this)
-                    .setMessage("New password and confirm password do not match")
+                    .setMessage("Mật khẩu xác nhận không khớp")
                     .setPositiveButton("OK", null)
                     .show();
             return;
         }
-        int userId = sharedPreferences.getInt("userId", -1);
 
-        if (userId == -1) {
-            new AlertDialog.Builder(this)
-                    .setMessage("User ID is missing. Please log in again.")
-                    .setPositiveButton("OK", (dialog, which) -> finish())
-                    .show();
-            return;
-        }
-        ApiService.apiService.changePassword(userId, currentPassword, newPassword).enqueue(new Callback<ApiResponse>() {
+        ForgotPasswordRequest request = new ForgotPasswordRequest(phone, email, newPassword);
+
+        ApiService.apiService.forgotPassword(request).enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-                        finish();
+                        new AlertDialog.Builder(ForgetPasswordActivity.this)
+                                .setMessage("Mật khẩu đã được đặt lại thành công")
+                                .setPositiveButton("OK", (dialog, which) -> finish())
+                                .show();
                     } else {
                         String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";
-                        new AlertDialog.Builder(ChangePasswordActivity.this)
+                        new AlertDialog.Builder(ForgetPasswordActivity.this)
                                 .setMessage(errorMessage)
                                 .setPositiveButton("OK", null)
                                 .show();
@@ -78,13 +79,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-                        new AlertDialog.Builder(ChangePasswordActivity.this)
+                        new AlertDialog.Builder(ForgetPasswordActivity.this)
                                 .setMessage(errorBody)
                                 .setPositiveButton("OK", null)
                                 .show();
                     } catch (IOException e) {
                         e.printStackTrace();
-                        new AlertDialog.Builder(ChangePasswordActivity.this)
+                        new AlertDialog.Builder(ForgetPasswordActivity.this)
                                 .setMessage("Error: " + e.getMessage())
                                 .setPositiveButton("OK", null)
                                 .show();
@@ -95,7 +96,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable throwable) {
                 throwable.printStackTrace();
-                new AlertDialog.Builder(ChangePasswordActivity.this)
+                new AlertDialog.Builder(ForgetPasswordActivity.this)
                         .setMessage("Error -> " + throwable.getMessage())
                         .setPositiveButton("OK", null)
                         .show();

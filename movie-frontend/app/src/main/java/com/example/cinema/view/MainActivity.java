@@ -1,5 +1,6 @@
 package com.example.cinema.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnBack;
+    private Button btnBack, accountButton;
     private TextView tvTitle, tvDirector, tvActors;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
         tvActors = findViewById(R.id.tvActors);
         btnBack.setOnClickListener(v -> {
             finish();
+        });
+        accountButton = findViewById(R.id.accountButton);
+        accountButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MainAccountActivity.class);
+            startActivity(intent);
         });
         ApiService.apiService.getMoviebyId(1).enqueue(new Callback<Currency>() {
             @Override

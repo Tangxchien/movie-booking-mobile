@@ -1,61 +1,68 @@
 package com.example.cinema.adapter;
 
-import android.text.TextUtils;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.cinema.R;
 import com.example.cinema.model.TicketInfo;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class TicketInfoAdapter extends RecyclerView.Adapter<TicketInfoAdapter.TicketInfoViewHolder> {
+public class TicketInfoAdapter extends RecyclerView.Adapter<TicketInfoAdapter.TicketViewHolder> {
 
-    private ArrayList<TicketInfo> tickets;
+    private List<TicketInfo> ticketList;
+    private Context context;
 
-    public TicketInfoAdapter(ArrayList<TicketInfo> tickets) {
-        this.tickets = tickets;
+    public TicketInfoAdapter(Context context, List<TicketInfo> ticketList) {
+        this.context = context;
+        this.ticketList = ticketList;
     }
 
     @NonNull
     @Override
-    public TicketInfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_booked_ticket, parent, false);
-        return new TicketInfoViewHolder(view);
+    public TicketViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_item_booked_ticket, parent, false);
+        return new TicketViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TicketInfoViewHolder holder, int position) {
-        TicketInfo ticket = tickets.get(position);
+    public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
+        TicketInfo ticket = ticketList.get(position);
+        holder.movieTitle.setText(ticket.getMovieTitle());
+        holder.cinemaName.setText(ticket.getCinemaName());
+        holder.showTime.setText(ticket.getShowTime());
+        holder.seats.setText(ticket.getSeats().toString());
 
-        holder.textViewMovieTitle.setText(ticket.getMovieTitle());
-        holder.textViewCinemaName.setText(ticket.getCinemaName());
-        holder.textViewShowTime.setText(ticket.getShowTime());
-        if (ticket.getSeats() != null && !ticket.getSeats().isEmpty()) {
-            holder.textViewSeats.setText(TextUtils.join(", ", ticket.getSeats()));
-        } else {
-            holder.textViewSeats.setText("No seats booked");
-        }    }
+        Glide.with(context).load(ticket.getMovieImage()).into(holder.movieImage);
+    }
 
     @Override
     public int getItemCount() {
-        return tickets.size();
+        return ticketList.size();
     }
 
-    static class TicketInfoViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewMovieTitle, textViewCinemaName, textViewShowTime, textViewSeats;
+    public static class TicketViewHolder extends RecyclerView.ViewHolder {
+        ImageView movieImage;
+        TextView movieTitle;
+        TextView cinemaName;
+        TextView showTime;
+        TextView seats;
 
-        public TicketInfoViewHolder(@NonNull View itemView) {
+        public TicketViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewMovieTitle = itemView.findViewById(R.id.textViewMovieTitle);
-            textViewCinemaName = itemView.findViewById(R.id.textViewCinemaName);
-            textViewShowTime = itemView.findViewById(R.id.textViewShowTime);
-            textViewSeats = itemView.findViewById(R.id.textViewSeats);
+            movieImage = itemView.findViewById(R.id.movieImage);
+            movieTitle = itemView.findViewById(R.id.movieTitle);
+            cinemaName = itemView.findViewById(R.id.cinemaName);
+            showTime = itemView.findViewById(R.id.showTime);
+            seats = itemView.findViewById(R.id.seats);
         }
     }
 }

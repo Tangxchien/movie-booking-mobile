@@ -5,48 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewMovieTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Movie Title"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/textViewCinemaName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Cinema Name"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewMovieTitle"
-        app:layout_constraintTop_margin="8dp"/>
-
-    <TextView
-        android:id="@+id/textViewShowTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Show Time"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewCinemaName"
-        app:layout_constraintTop_margin="8dp"/>
-
-    <TextView
-        android:id="@+id/textViewSeats"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Seats"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewShowTime"
-        app:layout_constraintTop_margin="8dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

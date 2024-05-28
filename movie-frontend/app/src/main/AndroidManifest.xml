@@ -17,6 +17,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.MainAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.BookedTicketActivity"
             android:exported="false" />
         <activity android:name=".view.EditAccountActivity" />

@@ -22,9 +22,11 @@ import com.example.cinema.model.SignIn;
 import com.example.cinema.model.SignInReponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,10 +34,10 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
-    private EditText registerName, registerPhone, registerEmail, registerPassword;
+    private EditText registerName, registerPhone, registerEmail, registerPassword, registerBirthday;
     private RadioGroup registerGender;
     private RadioButton registerMale;
-    private DatePicker registerBirthday;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,24 +50,47 @@ public class RegisterActivity extends AppCompatActivity {
         registerGender = findViewById(R.id.registerGender);
         registerMale = findViewById(R.id.registerMale);
         registerPassword = findViewById(R.id.registerPassword);
+        registerBirthday.setOnClickListener(v -> showDatePickerDialog());
         btnRegister.setOnClickListener(v -> {
             checkRegister();
         });
     }
-    private void checkRegister() {
-        String name = String.valueOf(registerName.getText());
-        String phone = String.valueOf(registerPhone.getText());
-        String email = String.valueOf(registerEmail.getText());
-        String password = String.valueOf(registerPassword.getText());
-        String gender = registerMale.isChecked() ? "Male" : "Female";
-        DatePicker datePicker = findViewById(R.id.registerBirthday);
-
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth();
-        int year = datePicker.getYear();
+    private void showDatePickerDialog() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(year, month, day);
-        Date birthday = calendar.getTime();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                RegisterActivity.this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    calendar.set(selectedYear, selectedMonth, selectedDay);
+                    Date selectedDate = calendar.getTime();
+                    String formattedDate = dateFormat.format(selectedDate);
+                    registerBirthday.setText(formattedDate);
+                },
+                year, month, day
+        );
+        datePickerDialog.show();
+    }
+    private void checkRegister() {
+        String name = registerName.getText().toString();
+        String phone = registerPhone.getText().toString();
+        String email = registerEmail.getText().toString();
+        String password = registerPassword.getText().toString();
+        String gender = registerMale.isChecked() ? "nam" : "nữ";
+        String birthdayStr = registerBirthday.getText().toString();
+
+        Date birthday;
+        try {
+            birthday = dateFormat.parse(birthdayStr);
+        } catch (Exception e) {
+            new AlertDialog.Builder(this)
+                    .setMessage("Vui lòng chọn ngày sinh hợp lệ")
+                    .setPositiveButton("OK", null)
+                    .show();
+            return;
+        }
 
         Register register = new Register( name, phone, email, gender, password, birthday);
         ApiService.apiService.registerUsers(register).enqueue(new Callback<ApiResponse>() {
