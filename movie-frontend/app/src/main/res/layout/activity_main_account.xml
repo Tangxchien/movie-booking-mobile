@@ -1,51 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/tvEditAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        android:text="THÔNG TIN CÁ NHÂN"
+        android:textColor="#2f3c7e"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
         android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
         android:textSize="24sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/editAccountLink"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sửa tài khoản"
         android:textSize="18sp"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="@android:color/background_dark"
+        android:padding="10dp"
+        android:drawableStart="@drawable/ic_badge_24"
+        android:drawableEnd="@drawable/ic_arrow_forward_ios_24"
+        android:drawablePadding="8dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
 
     <TextView
         android:id="@+id/changePasswordLink"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Đổi mật khẩu"
         android:textSize="18sp"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="@android:color/background_dark"
+        android:padding="10dp"
+        android:drawableStart="@drawable/ic_vpn_key_24"
+        android:drawableEnd="@drawable/ic_arrow_forward_ios_24"
+        android:drawablePadding="8dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
 
     <TextView
         android:id="@+id/bookedTicketLink"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lịch sử đặt vé"
         android:textSize="18sp"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="@android:color/background_dark"
+        android:padding="10dp"
+        android:drawableStart="@drawable/ic_access_time_24"
+        android:drawableEnd="@drawable/ic_arrow_forward_ios_24"
+        android:drawablePadding="8dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
     <TextView
         android:id="@+id/logoutLink"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Đăng xuất"
         android:textSize="18sp"
-        android:textColor="@android:color/holo_blue_dark"
-        android:layout_marginBottom="8dp"/>
+        android:textColor="@android:color/background_dark"
+        android:padding="10dp"
+        android:drawableStart="@drawable/ic_logout_24"
+        android:drawableEnd="@drawable/ic_arrow_forward_ios_24"
+        android:drawablePadding="8dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
 
 </LinearLayout>

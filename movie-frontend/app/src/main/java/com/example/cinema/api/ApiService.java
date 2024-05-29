@@ -25,7 +25,7 @@ public interface ApiService {
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
     ApiService apiService = new Retrofit.Builder()
-            .baseUrl("http://192.168.56.1:8080/")
+            .baseUrl("http://192.168.0.105:8080/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
@@ -38,7 +38,7 @@ public interface ApiService {
     Call<ApiResponse> registerUsers(@Body Register register);
     @PUT("api/update-account/{id}")
     Call<ApiResponse> editUsers(@Path("id") int id, @Body Register register);
-    @GET("api/change-password/{accountId}/{oldPassword}/{newPassword}")
+    @PUT("api/change-password/{accountId}/{oldPassword}/{newPassword}")
     Call<ApiResponse> changePassword(@Path("accountId") int accountId, @Path("oldPassword") String oldPassword, @Path("newPassword") String newPassword);
     @GET("api/get-tickets-by-account/{accountId}")
     Call<ApiResponse> getTicketByAccountId(@Path("accountId") int accountId);

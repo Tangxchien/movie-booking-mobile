@@ -1,39 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingBottom="20dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="20dp">
 
     <ImageView
         android:id="@+id/movieImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop" />
-
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="8dp"/>
     <TextView
         android:id="@+id/movieTitle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:paddingTop="8dp" />
-
-    <TextView
-        android:id="@+id/cinemaName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="4dp" />
+        app:layout_constraintTop_toTopOf="@id/movieImage"
+        app:layout_constraintLeft_toRightOf="@id/movieImage"
+        android:text="Tên bộ phim"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/showTime"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp" />
-
+        android:layout_below="@id/movieTitle"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/movieTitle"
+        app:layout_constraintTop_toBottomOf="@id/movieTitle"
+        android:text="Lịch chiếu" />
     <TextView
         android:id="@+id/seats"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingTop="4dp" />
-</LinearLayout>
+        android:layout_below="@id/showTime"
+        android:layout_marginTop="8dp"
+        app:layout_constraintLeft_toLeftOf="@id/showTime"
+        app:layout_constraintTop_toBottomOf="@id/showTime"
+        android:text="Đặt ghế" />
+</androidx.constraintlayout.widget.ConstraintLayout>

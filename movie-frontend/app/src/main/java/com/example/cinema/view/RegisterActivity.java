@@ -37,7 +37,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText registerName, registerPhone, registerEmail, registerPassword, registerBirthday;
     private RadioGroup registerGender;
     private RadioButton registerMale;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    private SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,16 +83,21 @@ public class RegisterActivity extends AppCompatActivity {
         String gender = registerMale.isChecked() ? "nam" : "nữ";
         String birthdayStr = registerBirthday.getText().toString();
 
-        Date birthday;
-        try {
-            birthday = dateFormat.parse(birthdayStr);
-        } catch (Exception e) {
-            new AlertDialog.Builder(this)
-                    .setMessage("Vui lòng chọn ngày sinh hợp lệ")
-                    .setPositiveButton("OK", null)
-                    .show();
-            return;
+        String birthday = null;
+        if (!birthdayStr.isEmpty()) {
+            try {
+                Date parsedDate = dateFormat.parse(birthdayStr);
+                birthday = inputDateFormat.format(parsedDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+                new AlertDialog.Builder(this)
+                        .setMessage("Vui lòng chọn ngày sinh hợp lệ")
+                        .setPositiveButton("OK", null)
+                        .show();
+                return;
+            }
         }
+
 
         Register register = new Register( name, phone, email, gender, password, birthday);
         ApiService.apiService.registerUsers(register).enqueue(new Callback<ApiResponse>() {

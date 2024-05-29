@@ -10,9 +10,9 @@ public class Register {
     private String email;
     private String gender;
     private String password;
-    private Date birthday;
+    private String birthday;
 
-    public Register(String name, String phone, String email, String gender, String password, Date birthday) {
+    public Register(String name, String phone, String email, String gender, String password, String birthday) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -21,7 +21,7 @@ public class Register {
         this.birthday = birthday;
     }
 
-    public Register(int id, String name, String phone, String email, String gender, String password, Date birthday) {
+    public Register(int id, String name, String phone, String email, String gender, String password, String birthday) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -31,7 +31,7 @@ public class Register {
         this.birthday = birthday;
     }
 
-    public Register(String name, String phone, String email, String gender, Date birthday) {
+    public Register(String name, String phone, String email, String gender, String birthday) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -87,11 +87,11 @@ public class Register {
         this.password = password;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 }

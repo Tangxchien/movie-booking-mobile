@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -47,7 +48,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         String confirmPassword = editConfirmPassword.getText().toString().trim();
         if (!newPassword.equals(confirmPassword)) {
             new AlertDialog.Builder(this)
-                    .setMessage("New password and confirm password do not match")
+                    .setMessage("Mật khẩu mới và xác nhận mật khẩu mới không trùng khớp")
                     .setPositiveButton("OK", null)
                     .show();
             return;
@@ -56,7 +57,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
         if (userId == -1) {
             new AlertDialog.Builder(this)
-                    .setMessage("User ID is missing. Please log in again.")
+                    .setMessage("Thiếu ID tài khoản. Vui lòng đăng nhập lại")
                     .setPositiveButton("OK", (dialog, which) -> finish())
                     .show();
             return;
@@ -67,6 +68,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
+                        Toast.makeText(getApplicationContext(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";

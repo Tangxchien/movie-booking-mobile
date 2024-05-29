@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.SharedPreferences;
 
@@ -20,6 +21,7 @@ import com.example.cinema.model.Currency;
 import com.example.cinema.model.SignIn;
 import com.example.cinema.model.SignInReponse;
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.io.IOException;
 
@@ -30,6 +32,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnRegister;
     private EditText edUser, edPassword;
+    private TextView tvForgetPassword;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -40,6 +43,11 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         edUser = findViewById(R.id.edUser);
         edPassword = findViewById(R.id.edPassword);
+        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+        tvForgetPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+            startActivity(intent);
+        });
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
@@ -61,11 +69,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful()) {
+                    Gson gson = new Gson();
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-                        // Lưu thông tin người dùng vào SharedPreferences
-                        SignInReponse userLoggedIn = (SignInReponse) apiResponse.getData();
+
+                        LinkedTreeMap dataMap = (LinkedTreeMap) apiResponse.getData();
+                        // Chuyển đổi Map thành JSON String
+                        String jsonData = gson.toJson(dataMap);
+                        SignInReponse userLoggedIn = gson.fromJson(jsonData, SignInReponse.class);
                         saveUserInfo(userLoggedIn);
+
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
@@ -112,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("userEmail", user.getEmail());
         editor.putString("userGender", user.getGender());
         editor.putString("userPassword", user.getPassword());
-        editor.putString("userBirthday", user.getBirthday().toString());
+        editor.putString("userBirthday", user.getBirthday());
         editor.apply();
     }
 }

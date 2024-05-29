@@ -1,17 +1,14 @@
-package com.example.cinema;
+package com.example.cinema.view;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cinema.R;
 import com.example.cinema.api.ApiService;
 import com.example.cinema.model.ApiResponse;
 import com.example.cinema.model.ForgotPasswordRequest;
@@ -51,7 +48,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
         if (!newPassword.equals(confirmPassword)) {
             new AlertDialog.Builder(this)
-                    .setMessage("Mật khẩu xác nhận không khớp")
+                    .setMessage("Mật khẩu mới và xác nhận mật khẩu mới không trùng khớp")
                     .setPositiveButton("OK", null)
                     .show();
             return;

@@ -1,19 +1,19 @@
 package com.example.cinema.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class TicketInfo {
     private String movieTitle;
     private String movieImage; // Có thể là null
-    private String cinemaName;
-    private String showTime; // Bạn có thể sử dụng Date nếu cần chuyển đổi chuỗi thời gian thành đối tượng Date
+//    private String cinemaName;
+    private Date showTime; // Bạn có thể sử dụng Date nếu cần chuyển đổi chuỗi thời gian thành đối tượng Date
     private List<String> seats;
 
     // Constructor
-    public TicketInfo(String movieTitle, String movieImage, String cinemaName, String showTime, List<String> seats) {
+    public TicketInfo(String movieTitle, String movieImage, Date showTime, List<String> seats) {
         this.movieTitle = movieTitle;
         this.movieImage = movieImage;
-        this.cinemaName = cinemaName;
         this.showTime = showTime;
         this.seats = seats;
     }
@@ -35,19 +35,19 @@ public class TicketInfo {
         this.movieImage = movieImage;
     }
 
-    public String getCinemaName() {
-        return cinemaName;
-    }
+//    public String getCinemaName() {
+//        return cinemaName;
+//    }
+//
+//    public void setCinemaName(String cinemaName) {
+//        this.cinemaName = cinemaName;
+//    }
 
-    public void setCinemaName(String cinemaName) {
-        this.cinemaName = cinemaName;
-    }
-
-    public String getShowTime() {
+    public Date getShowTime() {
         return showTime;
     }
 
-    public void setShowTime(String showTime) {
+    public void setShowTime(Date showTime) {
         this.showTime = showTime;
     }
 

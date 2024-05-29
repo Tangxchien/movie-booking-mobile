@@ -10,11 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.cinema.R;
 import com.example.cinema.model.TicketInfo;
+import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class TicketInfoAdapter extends RecyclerView.Adapter<TicketInfoAdapter.TicketViewHolder> {
 
@@ -37,11 +39,18 @@ public class TicketInfoAdapter extends RecyclerView.Adapter<TicketInfoAdapter.Ti
     public void onBindViewHolder(@NonNull TicketViewHolder holder, int position) {
         TicketInfo ticket = ticketList.get(position);
         holder.movieTitle.setText(ticket.getMovieTitle());
-        holder.cinemaName.setText(ticket.getCinemaName());
-        holder.showTime.setText(ticket.getShowTime());
-        holder.seats.setText(ticket.getSeats().toString());
+        String showTimeFormatted = "Giờ chiếu: " + new SimpleDateFormat("HH:mm dd/MM/yyyy", Locale.getDefault()).format(ticket.getShowTime());
+        holder.showTime.setText(showTimeFormatted);
 
-        Glide.with(context).load(ticket.getMovieImage()).into(holder.movieImage);
+        // Định dạng danh sách ghế
+        String seatsFormatted = "Ghế: " + String.join(", ", ticket.getSeats());
+        holder.seats.setText(seatsFormatted);
+
+        if (ticket.getMovieImage() != null && !ticket.getMovieImage().isEmpty()) {
+            Picasso.get().load(ticket.getMovieImage()).placeholder(R.drawable.ic_launcher_background).into(holder.movieImage);
+        } else {
+            holder.movieImage.setImageResource(R.drawable.ic_launcher_background);
+        }
     }
 
     @Override
@@ -52,7 +61,7 @@ public class TicketInfoAdapter extends RecyclerView.Adapter<TicketInfoAdapter.Ti
     public static class TicketViewHolder extends RecyclerView.ViewHolder {
         ImageView movieImage;
         TextView movieTitle;
-        TextView cinemaName;
+//        TextView cinemaName;
         TextView showTime;
         TextView seats;
 
@@ -60,7 +69,7 @@ public class TicketInfoAdapter extends RecyclerView.Adapter<TicketInfoAdapter.Ti
             super(itemView);
             movieImage = itemView.findViewById(R.id.movieImage);
             movieTitle = itemView.findViewById(R.id.movieTitle);
-            cinemaName = itemView.findViewById(R.id.cinemaName);
+//            cinemaName = itemView.findViewById(R.id.cinemaName);
             showTime = itemView.findViewById(R.id.showTime);
             seats = itemView.findViewById(R.id.seats);
         }

@@ -32,10 +32,10 @@ public class MainAccountActivity extends AppCompatActivity {
         editAccountLink = findViewById(R.id.editAccountLink);
         changePasswordLink = findViewById(R.id.changePasswordLink);
         bookedTicketLink = findViewById(R.id.bookedTicketLink);
+        logoutLink = findViewById(R.id.logoutLink);
 
         // Lấy tên người dùng từ SharedPreferences
-        String username = sharedPreferences.getString("userName", "Guest");
-        usernameTextView.setText(username);
+        updateUsername();
 
         editAccountLink.setOnClickListener(v -> {
             Intent intent = new Intent(MainAccountActivity.this, EditAccountActivity.class);
@@ -65,5 +65,16 @@ public class MainAccountActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Cập nhật tên người dùng từ SharedPreferences
+        updateUsername();
+    }
+
+    private void updateUsername() {
+        String username = sharedPreferences.getString("userName", "Guest");
+        usernameTextView.setText(username);
     }
 }
