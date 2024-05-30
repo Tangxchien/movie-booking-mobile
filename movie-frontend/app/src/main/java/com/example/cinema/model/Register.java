@@ -1,33 +1,14 @@
 package com.example.cinema.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-public class SignInReponse {
-    private int id;
+public class Register {
     private String name;
     private String phone;
     private String email;
     private String gender;
     private String password;
-    private String birthday;
-
-    public SignInReponse(String name, String phone, String email, String gender, String password, LocalDate birthday) {
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.gender = gender;
-        this.password = password;
-        this.birthday = birthday;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private LocalDate birthday;
 
     public String getName() {
         return name;
@@ -69,11 +50,11 @@ public class SignInReponse {
         this.password = password;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 }

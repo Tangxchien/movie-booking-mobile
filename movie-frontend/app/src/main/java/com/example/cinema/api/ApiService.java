@@ -5,6 +5,7 @@ import com.example.cinema.model.BookTicket;
 import com.example.cinema.model.Movie;
 import com.example.cinema.model.ShowTime;
 import com.example.cinema.model.SignIn;
+import com.example.cinema.model.SignInReponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -16,7 +17,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
     Gson gson = new GsonBuilder()
@@ -40,4 +43,6 @@ public interface ApiService {
     Call<ApiResponse<List<Movie>>> getListMovie();
     @GET("/api/get-seats/{movieId}/{showtimeId}")
     Call<ApiResponse<List<String>>> getSeats(@Path("movieId") String movieId, @Path("showtimeId") String showtimeId);
+    @POST("api/register")
+    Call<ApiResponse> registerUsers(@Body Register register);
 }
