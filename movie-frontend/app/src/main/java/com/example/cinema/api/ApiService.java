@@ -4,7 +4,6 @@ import com.example.cinema.model.ApiResponse;
 import com.example.cinema.model.BookTicket;
 import com.example.cinema.model.Movie;
 import com.example.cinema.model.ShowTime;
-import com.example.cinema.model.Currency;
 import com.example.cinema.model.ForgotPasswordRequest;
 import com.example.cinema.model.Register;
 import com.example.cinema.model.SignIn;
@@ -30,7 +29,7 @@ public interface ApiService {
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
     ApiService apiService = new Retrofit.Builder()
-            .baseUrl("http://172.20.10.8:8080/")
+            .baseUrl("http://192.168.33.105:8080/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);

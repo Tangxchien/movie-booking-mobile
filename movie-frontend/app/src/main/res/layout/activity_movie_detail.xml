@@ -27,13 +27,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="14dp"
         android:text="Diễn viên"
         android:textColor="@color/black"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDirectorV" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGenresK" />
 
     <TextView
         android:id="@+id/tvDirectorK"
@@ -117,13 +117,13 @@
         android:id="@+id/tvDirectorV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="19dp"
         android:text="Đạo diễn"
         android:textColor="@color/black"
         android:textSize="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDirectorK" />
+        app:layout_constraintStart_toEndOf="@+id/tvDirectorK"
+        app:layout_constraintTop_toBottomOf="@+id/tvAgeLimitV" />
 
     <TextView
         android:id="@+id/tvDescriptionK"
@@ -147,11 +147,10 @@
         android:layout_height="223dp"
         android:layout_marginStart="34dp"
         android:layout_marginTop="96dp"
-        android:layout_marginEnd="202dp"
+        android:layout_marginEnd="22dp"
         android:background="@drawable/border_radius"
         android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toStartOf="@+id/tvDescriptionV"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -160,12 +159,10 @@
         android:layout_width="139dp"
         android:layout_height="142dp"
         android:layout_marginTop="140dp"
-        android:text="Noi dung nhay cam"
+        android:layout_marginEnd="43dp"
         android:textColor="@color/black"
         android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/imgMovie"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
@@ -206,4 +203,29 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgMovie" />
+
+    <TextView
+        android:id="@+id/tvGenres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="18dp"
+        android:text="Thể loại"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/tvGenresK"
+        app:layout_constraintTop_toBottomOf="@+id/tvDirectorV" />
+
+    <TextView
+        android:id="@+id/tvGenresK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="16dp"
+        android:text="Thể loại"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDirectorK" />
 </androidx.constraintlayout.widget.ConstraintLayout>

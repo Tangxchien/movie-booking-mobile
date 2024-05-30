@@ -34,10 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin, btnRegister;
     private EditText edUser, edPassword;
     private TextView tvForgetPassword;
-    //Chú ý phần SharedPreferences
-    private SharedPreferences sharedPreferences;
-
-    private TextView tvForgetPassword;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -53,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
             startActivity(intent);
         });
-
-        //Chú ý phần SharedPreferences
         sharedPreferences = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
 
         btnLogin.setOnClickListener(v -> {
@@ -132,6 +126,4 @@ public class LoginActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void checkRegister() {
-    }
 }

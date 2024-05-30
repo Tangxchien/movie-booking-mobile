@@ -2,6 +2,7 @@ package com.example.cinema.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 public class Movie {
     private Integer id;
@@ -11,6 +12,15 @@ public class Movie {
     private String director;
     private Date releaseDate;
     private int ageLimit;
+    private List<String> genres;
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
 
     public Date getReleaseDate() {
         return releaseDate;

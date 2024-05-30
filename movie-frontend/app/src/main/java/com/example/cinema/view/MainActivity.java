@@ -3,6 +3,7 @@ package com.example.cinema.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -30,16 +31,23 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rcvMovies;
     private MovieAdapter movieAdapter;
     private List<Movie> mListMovie;
+    private ImageView imgAccount;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         rcvMovies = findViewById(R.id.rcv_movies);
+        imgAccount = findViewById(R.id.imgAccount);
         mListMovie = new ArrayList<>();
 
         DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL);
         rcvMovies.addItemDecoration(decoration);
+
+        imgAccount.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MainAccountActivity.class);
+            startActivity(intent);
+        });
 
         callApiGetMoives();
 

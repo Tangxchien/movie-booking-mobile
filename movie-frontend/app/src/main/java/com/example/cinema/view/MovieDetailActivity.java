@@ -34,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MovieDetailActivity extends AppCompatActivity {
-    TextView tvTitle, tvActorsV, tvDescriptionV, tvAgeLimitV, tvReleaseDateV, tvDirectorV;
+    TextView tvTitle, tvActorsV, tvDescriptionV, tvAgeLimitV, tvReleaseDateV, tvDirectorV, tvGenres;
     ImageView imgMovie;
     Button btnBookTicket;
     Spinner spShowTimes;
@@ -49,6 +49,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvAgeLimitV = findViewById(R.id.tvAgeLimitV);
         tvReleaseDateV = findViewById(R.id.tvReleaseDateV);
         tvDirectorV = findViewById(R.id.tvDirectorV);
+        tvGenres = findViewById(R.id.tvGenres);
         imgMovie = findViewById(R.id.imgMovie);
         spShowTimes = findViewById(R.id.spShowTimes);
         btnBookTicket = findViewById(R.id.btnBookTicket);
@@ -65,8 +66,25 @@ public class MovieDetailActivity extends AppCompatActivity {
                 tvDescriptionV.setText(movie.getDescription());
                 tvTitle.setText(movie.getTitle().toUpperCase());
                 tvActorsV.setText(movie.getActors());
-                tvAgeLimitV.setText("Phim dành cho khán giả trên " + String.valueOf(movie.getAgeLimit()) + " tuổi");
+
+                String ageLimit = String.valueOf(movie.getAgeLimit());
+                if(ageLimit.equals("0")){
+                    tvAgeLimitV.setText("Phim không giới hạn độ tuổi");
+                }
+                else
+                tvAgeLimitV.setText("Phim dành cho khán giả trên " + ageLimit + " tuổi");
                 tvDirectorV.setText(movie.getDirector());
+
+                List<String> genres = movie.getGenres();
+                StringBuilder genresTextBuilder = new StringBuilder();
+                for (int i = 0; i < genres.size(); i++) {
+                    genresTextBuilder.append(genres.get(i));
+                    if (i < genres.size() - 1) {
+                        genresTextBuilder.append(", ");
+                    }
+                }
+                String genresText = genresTextBuilder.toString();
+                tvGenres.setText(genresText);
                 Date releaseDate = movie.getReleaseDate();
                 tvReleaseDateV.setText(releaseDate.getDay() + " tháng " + releaseDate.getMonth() + ", " + (releaseDate.getYear() + 1900));
                 Picasso.get().load(movie.getImage()).into(imgMovie);
