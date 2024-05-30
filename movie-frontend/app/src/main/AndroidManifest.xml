@@ -15,12 +15,12 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Cinema"
         tools:targetApi="31">
-        <activity android:name=".view.LoginActivity"/>
+        <activity android:name=".view.MainActivity"/>
         <activity android:name=".view.RegisterActivity"/>
         <activity android:name=".view.MovieDetailActivity"/>
         <activity android:name=".view.BookTicketActivity"/>
         <activity android:name=".view.PaymentActivity"/>
-        <activity android:name=".view.MainActivity"
+        <activity android:name=".view.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

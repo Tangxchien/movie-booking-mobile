@@ -76,7 +76,6 @@ public class MovieDetailActivity extends AppCompatActivity {
                         String selectedShowTime = (String) parent.getItemAtPosition(position);
                         intent = new Intent(MovieDetailActivity.this, BookTicketActivity.class);
                         intent.putExtra("showTimeId", selectedShowTime.charAt(0));
-
                         intent.putExtra("showTime", selectedShowTime.substring(4));
                     }
 
@@ -87,6 +86,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 btnBookTicket.setOnClickListener(v -> {
                     intent.putExtra("price", movie.getPrice());
                     intent.putExtra("name", movie.getTitle());
+                    intent.putExtra("MovieName", movie.getTitle());
                     startActivity(intent);
                 });
 

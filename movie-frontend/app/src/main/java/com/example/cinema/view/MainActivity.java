@@ -30,35 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView rcvMovies;
     private MovieAdapter movieAdapter;
     private List<Movie> mListMovie;
-    private BottomNavigationView toolbar;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        toolbar = findViewById(R.id.toolbar);
-
-        toolbar.setOnItemSelectedListener(item -> {
-                int itemId = item.getItemId();
-                if (itemId == R.id.nav_home) {
-                    return true;
-                }
-                    else if (itemId == R.id.nav_cinema)
-                {
-                    return true;
-                }
-                else if (itemId == R.id.nav_schedule)
-                {
-                    return true;
-                }
-                else if (itemId == R.id.nav_profile)
-                {
-                    return true;
-                }
-                    else
-                        return false;
-        });
 
         rcvMovies = findViewById(R.id.rcv_movies);
         mListMovie = new ArrayList<>();

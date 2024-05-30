@@ -46,4 +46,14 @@ public class BookTicket {
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
+
+    @Override
+    public String toString() {
+        return "BookTicket{" +
+                "accountId=" + accountId +
+                ", showtimeId=" + showtimeId +
+                ", seatList=" + seatList +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

@@ -5,38 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="164dp"
-        android:text="Đăng nhập"
-        android:textColor="#2f3c7e"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.189"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="138dp"
-        android:layout_height="143dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="56dp"
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="266dp"
+        android:layout_height="228dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="112dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvLogin"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lottie_loop="true"
         app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/login"/>
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/login" />
 
     <EditText
         android:id="@+id/edUser"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
         android:layout_marginBottom="33dp"
         android:ems="10"
         android:hint="Tài khoản"
@@ -44,9 +32,9 @@
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/edPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
 
     <EditText
         android:id="@+id/edPassword"
@@ -72,7 +60,6 @@
         android:layout_marginBottom="18dp"
         android:background="@drawable/btn_radius"
         android:text="ĐĂNG NHẬP"
-        android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/tvForgetPW"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,13 +83,10 @@
         android:id="@+id/tvForgetPW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="57dp"
-        android:layout_marginEnd="254dp"
-        android:layout_marginBottom="82dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="20dp"
         android:text="Quên mật khẩu?"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 

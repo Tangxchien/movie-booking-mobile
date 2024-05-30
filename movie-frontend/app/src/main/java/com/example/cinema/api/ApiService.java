@@ -1,6 +1,7 @@
 package com.example.cinema.api;
 
 import com.example.cinema.model.ApiResponse;
+import com.example.cinema.model.BookTicket;
 import com.example.cinema.model.Movie;
 import com.example.cinema.model.ShowTime;
 import com.example.cinema.model.SignIn;
@@ -22,7 +23,7 @@ public interface ApiService {
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
     ApiService apiService = new Retrofit.Builder()
-            .baseUrl("http://10.10.2.233/")
+            .baseUrl("http://172.20.10.8:8080/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
@@ -33,6 +34,8 @@ public interface ApiService {
     Call<ApiResponse<List<ShowTime>>> getShowTimebyId(@Path("id") int id);
     @POST("api/login")
     Call<ApiResponse> loginUsers(@Body SignIn signIn);
+    @POST("api/book-ticket")
+    Call<ApiResponse> bookTicket(@Body BookTicket bookTicket);
     @GET("api/all-movies")
     Call<ApiResponse<List<Movie>>> getListMovie();
     @GET("/api/get-seats/{movieId}/{showtimeId}")

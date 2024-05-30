@@ -10,7 +10,7 @@ public class SignInReponse {
     private String email;
     private String gender;
     private String password;
-    private LocalDate birthday;
+    private String birthday;
 
     public int getId() {
         return id;
@@ -60,11 +60,11 @@ public class SignInReponse {
         this.password = password;
     }
 
-    public LocalDate getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 }

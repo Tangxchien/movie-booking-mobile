@@ -5,18 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="190dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/success" />
+
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="105dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="104dp"
-        android:text="Đặt vé thành công"
+        android:text="ĐẶT VÉ THÀNH CÔNG"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,10 +49,11 @@
         android:id="@+id/tvMoviePriceV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="44dp"
         android:text="Thanh toán"
         android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tvMoviePriceK"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieSeatV" />
 
@@ -47,10 +61,11 @@
         android:id="@+id/tvMovieSeatV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="36dp"
         android:text="Chỗ ngồi"
         android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tvMovieSeatK"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieTimeV" />
 
@@ -58,10 +73,11 @@
         android:id="@+id/tvMovieTimeK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="60dp"
         android:text="Thời gian: "
         android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieName" />
 
@@ -69,10 +85,11 @@
         android:id="@+id/tvMovieTimeV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginTop="212dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="164dp"
         android:text="00/00/00 "
         android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/tvMovieTimeK"
         app:layout_constraintTop_toBottomOf="@+id/tv1" />
 
@@ -80,10 +97,11 @@
         android:id="@+id/tvMovieSeatK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
         android:text="Vị trí ghế ngồi: "
         android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieTimeK" />
 
@@ -91,10 +109,11 @@
         android:id="@+id/tvMoviePriceK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
         android:text="Tổng tiền (bao gồm phụ thu) : "
         android:textColor="@color/black"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMovieSeatK" />
 
@@ -102,11 +121,12 @@
         android:id="@+id/tvMovieName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="72dp"
         android:text="Tên phim"
-        android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textColor="#FF0000"
+        android:textSize="24dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

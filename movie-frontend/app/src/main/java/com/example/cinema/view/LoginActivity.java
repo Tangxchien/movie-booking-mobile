@@ -77,10 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
 
                         LinkedTreeMap dataMap = (LinkedTreeMap) apiResponse.getData();
-                        // Chuyển đổi Map thành JSON String
                         String jsonData = gson.toJson(dataMap);
                         SignInReponse userLoggedIn = gson.fromJson(jsonData, SignInReponse.class);
-                        //Chú ý phần SharedPreferences
                         saveUserInfo(userLoggedIn);
 
 
