@@ -1,14 +1,51 @@
 package com.example.cinema.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Register {
+    private int id;
     private String name;
     private String phone;
     private String email;
     private String gender;
     private String password;
-    private LocalDate birthday;
+    private String birthday;
+
+    public Register(String name, String phone, String email, String gender, String password, String birthday) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.password = password;
+        this.birthday = birthday;
+    }
+
+    public Register(int id, String name, String phone, String email, String gender, String password, String birthday) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.password = password;
+        this.birthday = birthday;
+    }
+
+    public Register(String name, String phone, String email, String gender, String birthday) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.birthday = birthday;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -50,11 +87,11 @@ public class Register {
         this.password = password;
     }
 
-    public LocalDate getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 }

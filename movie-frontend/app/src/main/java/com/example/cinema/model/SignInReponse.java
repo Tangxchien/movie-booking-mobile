@@ -2,6 +2,7 @@ package com.example.cinema.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class SignInReponse {
     private int id;
@@ -12,7 +13,7 @@ public class SignInReponse {
     private String password;
     private String birthday;
 
-    public SignInReponse(String name, String phone, String email, String gender, String password, LocalDate birthday) {
+    public SignInReponse(String name, String phone, String email, String gender, String password, String birthday) {
         this.name = name;
         this.phone = phone;
         this.email = email;

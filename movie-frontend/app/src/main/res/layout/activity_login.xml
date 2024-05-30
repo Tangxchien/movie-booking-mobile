@@ -27,8 +27,8 @@
         android:layout_height="50dp"
         android:layout_marginBottom="33dp"
         android:ems="10"
-        android:hint="Tài khoản"
-        android:inputType="text"
+        android:hint="Số điện thoại"
+        android:inputType="number"
         android:text=""
         app:layout_constraintBottom_toTopOf="@+id/edPassword"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +50,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edUser" />
+    <TextView
+        android:id="@+id/tvForgetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="254dp"
+        android:layout_marginBottom="82dp"
+        android:text="Quên mật khẩu?"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     <Button
         android:id="@+id/btnLogin"

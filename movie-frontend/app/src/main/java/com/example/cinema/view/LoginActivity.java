@@ -37,6 +37,9 @@ public class LoginActivity extends AppCompatActivity {
     //Chú ý phần SharedPreferences
     private SharedPreferences sharedPreferences;
 
+    private TextView tvForgetPassword;
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,13 +48,12 @@ public class LoginActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         edUser = findViewById(R.id.edUser);
         edPassword = findViewById(R.id.edPassword);
-//        tvForgetPassword = findViewById(R.id.tvForgetPassword);
-//        tvForgetPassword.setOnClickListener(v -> {
-//            Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
-//            startActivity(intent);
-//        });
+        tvForgetPassword = findViewById(R.id.tvForgetPassword);
+        tvForgetPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgetPasswordActivity.class);
+            startActivity(intent);
+        });
 
-        // Initialize SharedPreferences
         //Chú ý phần SharedPreferences
         sharedPreferences = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
 
@@ -67,60 +69,52 @@ public class LoginActivity extends AppCompatActivity {
     private void checkLogin(){
         String phone = String.valueOf(edUser.getText());
         String pass = String.valueOf(edPassword.getText());
+        if (phone.isEmpty() || pass.isEmpty()) {
+            showAlert("Vui lòng nhập cả số điện thoại và mật khẩu.");
+            return;
+        }
         SignIn signIn = new SignIn(phone, pass);
         ApiService.apiService.loginUsers(signIn).enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                ApiResponse apiResponse = response.body();
                 if (response.isSuccessful()) {
-                    Gson gson = new Gson();
-                    ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-
+                        Gson gson = new Gson();
                         LinkedTreeMap dataMap = (LinkedTreeMap) apiResponse.getData();
+                        // Chuyển đổi Map thành JSON String
                         String jsonData = gson.toJson(dataMap);
                         SignInReponse userLoggedIn = gson.fromJson(jsonData, SignInReponse.class);
                         saveUserInfo(userLoggedIn);
 
-
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
+//                        finish();
                     } else {
-                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";
-                        new AlertDialog.Builder(LoginActivity.this)
-                                .setMessage(errorMessage)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
+                        showAlert(errorMessage);
                     }
                 } else {
                     try {
-                        String errorBody = response.errorBody().string();
-                        new AlertDialog.Builder(LoginActivity.this)
-                                .setMessage(errorBody)
-                                .setPositiveButton("OK", null)
-                                .show();
-                    } catch (IOException e) {
+                        String errorBody = response.body().getMessage();
+                        showAlert(errorBody);
+                    } catch (Exception e) {
                         e.printStackTrace();
-                        new AlertDialog.Builder(LoginActivity.this)
-                                .setMessage("Error: " + e.getMessage())
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert("Error: " + e.getMessage());
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable throwable) {
                 throwable.printStackTrace();
-                new AlertDialog.Builder(LoginActivity.this)
-                        .setMessage("Error -> " + throwable.getMessage())
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Error -> " + throwable.getMessage());
             }
         });
 
     }
 
     private void saveUserInfo(SignInReponse user) {
+        //Chú ý phần SharedPreferences
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("userId", user.getId());
         editor.putString("userName", user.getName());
@@ -128,7 +122,16 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("userEmail", user.getEmail());
         editor.putString("userGender", user.getGender());
         editor.putString("userPassword", user.getPassword());
-//        editor.putString("userBirthday", user.getBirthday());
+        editor.putString("userBirthday", user.getBirthday());
         editor.apply();
+    }
+    private void showAlert(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
+    }
+
+    private void checkRegister() {
     }
 }

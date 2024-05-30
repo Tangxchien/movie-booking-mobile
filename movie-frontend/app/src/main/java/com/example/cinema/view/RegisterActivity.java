@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -21,7 +22,11 @@ import com.example.cinema.model.SignIn;
 import com.example.cinema.model.SignInReponse;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,9 +34,12 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
-    private EditText registerName, registerPhone, registerEmail, registerBirthday, registerPassword;
+    private EditText registerName, registerPhone, registerEmail, registerPassword, registerBirthday;
     private RadioGroup registerGender;
     private RadioButton registerMale;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+    private SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,19 +50,54 @@ public class RegisterActivity extends AppCompatActivity {
         registerEmail = findViewById(R.id.registerEmail);
         registerBirthday = findViewById(R.id.registerBirthday);
         registerGender = findViewById(R.id.registerGender);
+        registerMale = findViewById(R.id.registerMale);
         registerPassword = findViewById(R.id.registerPassword);
+        registerBirthday.setOnClickListener(v -> showDatePickerDialog());
         btnRegister.setOnClickListener(v -> {
             checkRegister();
         });
     }
+    private void showDatePickerDialog() {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                RegisterActivity.this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    calendar.set(selectedYear, selectedMonth, selectedDay);
+                    Date selectedDate = calendar.getTime();
+                    String formattedDate = dateFormat.format(selectedDate);
+                    registerBirthday.setText(formattedDate);
+                },
+                year, month, day
+        );
+        datePickerDialog.show();
+    }
     private void checkRegister() {
-        String name = String.valueOf(registerName.getText());
-        String phone = String.valueOf(registerPhone.getText());
-        String email = String.valueOf(registerEmail.getText());
-        String password = String.valueOf(registerPassword.getText());
-        String gender = registerMale.isChecked() ? "Male" : "Female";
-        String birthdayString = String.valueOf(registerBirthday.getText());
-        LocalDate birthday = LocalDate.parse(birthdayString);
+        String name = registerName.getText().toString();
+        String phone = registerPhone.getText().toString();
+        String email = registerEmail.getText().toString();
+        String password = registerPassword.getText().toString();
+        String gender = registerMale.isChecked() ? "nam" : "nữ";
+        String birthdayStr = registerBirthday.getText().toString();
+        if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || birthdayStr.isEmpty()) {
+            showAlert("Vui lòng nhập đầy đủ thông tin.");
+            return;
+        }
+        String birthday = null;
+        if (!birthdayStr.isEmpty()) {
+            try {
+                Date parsedDate = dateFormat.parse(birthdayStr);
+                birthday = inputDateFormat.format(parsedDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert("Vui lòng chọn ngày sinh hợp lệ.");
+                return;
+            }
+        }
+
 
         Register register = new Register( name, phone, email, gender, password, birthday);
         ApiService.apiService.registerUsers(register).enqueue(new Callback<ApiResponse>() {
@@ -65,26 +108,18 @@ public class RegisterActivity extends AppCompatActivity {
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
-                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";
-                        new AlertDialog.Builder(RegisterActivity.this)
-                                .setMessage(errorMessage)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
+                        showAlert(errorMessage);
                     }
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-                        new AlertDialog.Builder(RegisterActivity.this)
-                                .setMessage(errorBody)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert(errorBody);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        new AlertDialog.Builder(RegisterActivity.this)
-                                .setMessage("Error: " + e.getMessage())
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert("Error: " + e.getMessage());
                     }
                 }
             }
@@ -92,11 +127,14 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable throwable) {
                 throwable.printStackTrace();
-                new AlertDialog.Builder(RegisterActivity.this)
-                        .setMessage("Error -> " + throwable.getMessage())
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Error -> " + throwable.getMessage());
             }
         });
+    }
+    private void showAlert(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }
