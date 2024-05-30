@@ -29,7 +29,7 @@ public class Movie {
     }
 
     private String actors;
-    private float price;
+    private int price;
     public String getImage() {
         return image;
     }
@@ -78,15 +78,15 @@ public class Movie {
         this.actors = actors;
     }
 
-    public float getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public Movie(Integer id, String image, String title, String description, String director, Date releaseDate, int ageLimit, String actors, float price) {
+    public Movie(Integer id, String image, String title, String description, String director, Date releaseDate, int ageLimit, String actors, int price) {
         this.id = id;
         this.image = image;
         this.title = title;

@@ -1,0 +1,7 @@
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke
+        android:width="2dp"
+        android:color="#e0e0e0" /> <!-- Màu viền bạn muốn, ở đây là màu đen -->
+    <corners android:radius="7dp" /> <!-- Góc bo tròn, có thể điều chỉnh theo ý muốn -->
+</shape>

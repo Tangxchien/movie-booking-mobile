@@ -5,106 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="13dp"
-        android:text="B"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/rcvBookTicket"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvA" />
-
-    <TextView
-        android:id="@+id/tvB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="14dp"
-        android:text="E"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/rcvBookTicket"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="218dp" />
-
-    <TextView
-        android:id="@+id/tvB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="13dp"
-        android:text="D"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/rcvBookTicket"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="189dp" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvBookTicket"
         android:layout_width="380dp"
-        android:layout_height="431dp"
+        android:layout_height="350dp"
+        android:nestedScrollingEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/btnPay1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginEnd="77dp"
-        android:layout_marginBottom="32dp"
+        android:id="@+id/btnPay"
+        android:layout_width="304dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="28dp"
         android:text="Hoàn tất thanh toán (1/2)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tvA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="86dp"
-        android:layout_marginEnd="12dp"
-        android:text="A"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/rcvBookTicket"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="13dp"
-        android:text="C"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/rcvBookTicket"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="273dp" />
-
-    <TextView
-        android:id="@+id/tvB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
-        android:layout_marginEnd="14dp"
-        android:text="F"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/rcvBookTicket"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="254dp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -117,5 +38,79 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img3" />
+
+    <TextView
+        android:id="@+id/tvTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="52dp"
+        android:text="0đ"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+
+    <TextView
+        android:id="@+id/tvTotalSeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="16dp"
+        android:text="0 ghế"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvShowTime" />
+
+    <TextView
+        android:id="@+id/tvTitleSeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="10dp"
+        android:text="Tên phim"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="53dp"
+        android:text="Tổng tiền"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="316dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="67dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rcvBookTicket"
+        app:srcCompat="@drawable/img_seat_figma" />
+
+    <TextView
+        android:id="@+id/tvShowTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="8dp"
+        android:text="Giờ chiếu"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleSeat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

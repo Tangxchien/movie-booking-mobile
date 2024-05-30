@@ -1,7 +1,13 @@
 package com.example.cinema.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -12,11 +18,16 @@ import com.example.cinema.R;
 import com.example.cinema.api.ApiService;
 import com.example.cinema.model.ApiResponse;
 import com.example.cinema.model.Movie;
+import com.example.cinema.model.ShowTime;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,6 +36,9 @@ import retrofit2.Response;
 public class MovieDetailActivity extends AppCompatActivity {
     TextView tvTitle, tvActorsV, tvDescriptionV, tvAgeLimitV, tvReleaseDateV, tvDirectorV;
     ImageView imgMovie;
+    Button btnBookTicket;
+    Spinner spShowTimes;
+    Intent intent;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +50,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         tvReleaseDateV = findViewById(R.id.tvReleaseDateV);
         tvDirectorV = findViewById(R.id.tvDirectorV);
         imgMovie = findViewById(R.id.imgMovie);
+        spShowTimes = findViewById(R.id.spShowTimes);
+        btnBookTicket = findViewById(R.id.btnBookTicket);
         int id = getIntent().getIntExtra("id", 0);
         callApiGetMovieById(id);
+        callApiGetShowTimes(id);
     }
 
     private void callApiGetMovieById(int id) {
@@ -53,7 +70,26 @@ public class MovieDetailActivity extends AppCompatActivity {
                 Date releaseDate = movie.getReleaseDate();
                 tvReleaseDateV.setText(releaseDate.getDay() + " tháng " + releaseDate.getMonth() + ", " + (releaseDate.getYear() + 1900));
                 Picasso.get().load(movie.getImage()).into(imgMovie);
-//                new AlertDialog.Builder(MoieDetailActivity.this).setMessage().show();
+                spShowTimes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedShowTime = (String) parent.getItemAtPosition(position);
+                        intent = new Intent(MovieDetailActivity.this, BookTicketActivity.class);
+                        intent.putExtra("showTimeId", selectedShowTime.charAt(0));
+
+                        intent.putExtra("showTime", selectedShowTime.substring(4));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+                btnBookTicket.setOnClickListener(v -> {
+                    intent.putExtra("price", movie.getPrice());
+                    intent.putExtra("name", movie.getTitle());
+                    startActivity(intent);
+                });
+
             }
 
             @Override
@@ -62,4 +98,30 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
     }
+    private void callApiGetShowTimes(int movieId) {
+        ApiService.apiService.getShowTimebyId(movieId).enqueue(new Callback<ApiResponse<List<ShowTime>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<List<ShowTime>>> call, Response<ApiResponse<List<ShowTime>>> response) {
+                if (response.body() != null && response.body().getData() != null) {
+                    List<ShowTime> showTimes = response.body().getData();
+                    List<String> showTimeStrings = new ArrayList<>();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd 'thg' MM, yyyy", Locale.getDefault());
+                    for (ShowTime showTime : showTimes) {
+                        String formattedDate = sdf.format(showTime.getShowTime());
+                        showTimeStrings.add(showTime.getId() + " : " + formattedDate);
+                    }
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(MovieDetailActivity.this, android.R.layout.simple_spinner_item, showTimeStrings);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spShowTimes.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<List<ShowTime>>> call, Throwable throwable) {
+                new AlertDialog.Builder(MovieDetailActivity.this).setMessage(throwable.getMessage()).show();
+            }
+        });
+    }
+
+
 }

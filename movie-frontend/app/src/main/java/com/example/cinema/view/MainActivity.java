@@ -2,13 +2,13 @@ package com.example.cinema.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cinema.R;
@@ -16,6 +16,7 @@ import com.example.cinema.adapter.MovieAdapter;
 import com.example.cinema.api.ApiService;
 import com.example.cinema.model.ApiResponse;
 import com.example.cinema.model.Movie;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,29 +26,51 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
     private RecyclerView rcvMovies;
     private MovieAdapter movieAdapter;
-    private Button btnBack;
     private List<Movie> mListMovie;
+    private BottomNavigationView toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnBack = findViewById(R.id.btnBack);
+
+        toolbar = findViewById(R.id.toolbar);
+
+        toolbar.setOnItemSelectedListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == R.id.nav_home) {
+                    return true;
+                }
+                    else if (itemId == R.id.nav_cinema)
+                {
+                    return true;
+                }
+                else if (itemId == R.id.nav_schedule)
+                {
+                    return true;
+                }
+                else if (itemId == R.id.nav_profile)
+                {
+                    return true;
+                }
+                    else
+                        return false;
+        });
+
         rcvMovies = findViewById(R.id.rcv_movies);
         mListMovie = new ArrayList<>();
 
-        //Them dai phan cach bang DividerItemDecoration
         DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL);
         rcvMovies.addItemDecoration(decoration);
 
         callApiGetMoives();
-        btnBack.setOnClickListener(v -> {
-            finish();
-        });
+
     }
 
-    public void callApiGetMoives(){
+    public void callApiGetMoives() {
         ApiService.apiService.getListMovie().enqueue(new Callback<ApiResponse<List<Movie>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Movie>>> call, Response<ApiResponse<List<Movie>>> response) {
@@ -61,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
                 });
                 rcvMovies.setAdapter(movieAdapter);
-//                new AlertDialog.Builder(MainActivity.this).setMessage(response.body().getData().toString()).show();
             }
 
             @Override
@@ -73,6 +95,5 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
-        
     }
 }

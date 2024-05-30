@@ -1,5 +1,7 @@
 package com.example.cinema.model;
 
+import java.util.List;
+
 public class ApiResponse<T> {
     private String status;
     private T data;
