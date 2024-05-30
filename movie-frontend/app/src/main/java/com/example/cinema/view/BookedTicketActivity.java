@@ -77,36 +77,31 @@ public class BookedTicketActivity extends AppCompatActivity {
                         ticketInfoAdapter = new TicketInfoAdapter(BookedTicketActivity.this, tickets);
                         recyclerView.setAdapter(ticketInfoAdapter);
                     } else {
-                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";
-                        new AlertDialog.Builder(BookedTicketActivity.this)
-                                .setMessage(errorMessage)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
+                        showAlert(errorMessage);
                     }
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-                        new AlertDialog.Builder(BookedTicketActivity.this)
-                                .setMessage(errorBody)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert(errorBody);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        new AlertDialog.Builder(BookedTicketActivity.this)
-                                .setMessage("Error: " + e.getMessage())
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert("Error: " + e.getMessage());
+
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                new AlertDialog.Builder(BookedTicketActivity.this)
-                        .setMessage("Request failed: " + t.getMessage())
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Error -> " + t.getMessage());
             }
         });
+    }
+    private void showAlert(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

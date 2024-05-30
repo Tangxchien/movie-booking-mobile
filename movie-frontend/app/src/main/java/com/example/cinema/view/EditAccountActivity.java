@@ -43,6 +43,7 @@ public class EditAccountActivity extends AppCompatActivity {
     private EditText editName, editPhone, editEmail, editBirthday;
     private RadioGroup editGender;
     private RadioButton editMale, editFemale;
+    //Chú ý phần SharedPreferences
     private SharedPreferences sharedPreferences;
     private SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault());
 
@@ -64,6 +65,7 @@ public class EditAccountActivity extends AppCompatActivity {
         editMale = findViewById(R.id.editMale);
         editFemale = findViewById(R.id.editFemale);
         btnEditAccount = findViewById(R.id.btnEditAccount);
+        //Chú ý phần SharedPreferences
         sharedPreferences = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
 
         loadUserInfo();
@@ -91,6 +93,7 @@ public class EditAccountActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
     private void loadUserInfo() {
+        //Chú ý phần SharedPreferences
         String name = sharedPreferences.getString("userName", "");
         String phone = sharedPreferences.getString("userPhone", "");
         String email = sharedPreferences.getString("userEmail", "");
@@ -115,12 +118,10 @@ public class EditAccountActivity extends AppCompatActivity {
                 // Hiển thị chuỗi định dạng mới lên EditText
                 editBirthday.setText(formattedBirthday);
             } catch (Exception e) {
-                editBirthday.setText("");
+                editBirthday.setText("Chọn ngày sinh");
                 e.printStackTrace();
-                new AlertDialog.Builder(this)
-                        .setMessage("Ngày sinh không hợp lệ")
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Ngày sinh không hợp lệ");
+                return;
             }
         }
     }
@@ -131,6 +132,10 @@ public class EditAccountActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String gender = editMale.isChecked() ? "nam" : "nữ";
         String birthdayStr = editBirthday.getText().toString();
+        if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || gender.isEmpty() || birthdayStr.isEmpty()) {
+            showAlert("Vui lòng nhập đầy đủ thông tin.");
+            return;
+        }
         String birthday = null;
         if (!birthdayStr.isEmpty()) {
             try {
@@ -138,14 +143,11 @@ public class EditAccountActivity extends AppCompatActivity {
                 birthday = inputDateFormat.format(parsedDate);
             } catch (Exception e) {
                 e.printStackTrace();
-                new AlertDialog.Builder(this)
-                        .setMessage("Vui lòng chọn ngày sinh hợp lệ")
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Vui lòng chọn ngày sinh hợp lệ");
                 return;
             }
         }
-
+        //Chú ý phần SharedPreferences
         int userId = sharedPreferences.getInt("userId", -1);
 
         if (userId == -1) {
@@ -163,7 +165,7 @@ public class EditAccountActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-                        Toast.makeText(getApplicationContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                        showAlert("Cập nhật thông tin thành công");
                         // Cập nhật SharedPreferences
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("userName", name);
@@ -175,25 +177,16 @@ public class EditAccountActivity extends AppCompatActivity {
 
                         finish();
                     } else {
-                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";
-                        new AlertDialog.Builder(EditAccountActivity.this)
-                                .setMessage(errorMessage)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
+                        showAlert(errorMessage);
                     }
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-                        new AlertDialog.Builder(EditAccountActivity.this)
-                                .setMessage(errorBody)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert(errorBody);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        new AlertDialog.Builder(EditAccountActivity.this)
-                                .setMessage("Error: " + e.getMessage())
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert("Error: " + e.getMessage());
                     }
                 }
             }
@@ -201,11 +194,14 @@ public class EditAccountActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable throwable) {
                 throwable.printStackTrace();
-                new AlertDialog.Builder(EditAccountActivity.this)
-                        .setMessage("Error -> " + throwable.getMessage())
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Error -> " + throwable.getMessage());
             }
         });
+    }
+    private void showAlert(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

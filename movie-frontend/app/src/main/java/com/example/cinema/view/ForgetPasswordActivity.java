@@ -22,7 +22,7 @@ import retrofit2.Response;
 public class ForgetPasswordActivity extends AppCompatActivity {
 
     private EditText editPhone, editEmail, editNewPassword, editConfirmPassword;
-    private Button btnSubmit, btnBackToLogin;
+    private Button btnSubmit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,10 +34,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         editNewPassword = findViewById(R.id.editNewPassword);
         editConfirmPassword = findViewById(R.id.editConfirmPassword);
         btnSubmit = findViewById(R.id.btnSubmit);
-        btnBackToLogin = findViewById(R.id.btnBackToLogin);
 
         btnSubmit.setOnClickListener(v -> submitForgotPassword());
-        btnBackToLogin.setOnClickListener(v -> finish());
+//        btnBackToLogin.setOnClickListener(v -> finish());
     }
 
     private void submitForgotPassword() {
@@ -45,13 +44,12 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String newPassword = editNewPassword.getText().toString();
         String confirmPassword = editConfirmPassword.getText().toString();
-
-        if (!newPassword.equals(confirmPassword)) {
-            new AlertDialog.Builder(this)
-                    .setMessage("Mật khẩu mới và xác nhận mật khẩu mới không trùng khớp")
-                    .setPositiveButton("OK", null)
-                    .show();
+        if (phone.isEmpty() || email.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+            showAlert("Vui lòng nhập đầy đủ thông tin.");
             return;
+        }
+        if (!newPassword.equals(confirmPassword)) {
+            showAlert("Mật khẩu mới và xác nhận mật khẩu mới không trùng khớp");
         }
 
         ForgotPasswordRequest request = new ForgotPasswordRequest(phone, email, newPassword);
@@ -62,30 +60,22 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
+                        showAlert("Mật khẩu đã được đặt lại thành công");
                         new AlertDialog.Builder(ForgetPasswordActivity.this)
                                 .setMessage("Mật khẩu đã được đặt lại thành công")
                                 .setPositiveButton("OK", (dialog, which) -> finish())
                                 .show();
                     } else {
-                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";
-                        new AlertDialog.Builder(ForgetPasswordActivity.this)
-                                .setMessage(errorMessage)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
+                        showAlert(errorMessage);
                     }
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-                        new AlertDialog.Builder(ForgetPasswordActivity.this)
-                                .setMessage(errorBody)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert(errorBody);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        new AlertDialog.Builder(ForgetPasswordActivity.this)
-                                .setMessage("Error: " + e.getMessage())
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert("Error: " + e.getMessage());
                     }
                 }
             }
@@ -93,11 +83,14 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable throwable) {
                 throwable.printStackTrace();
-                new AlertDialog.Builder(ForgetPasswordActivity.this)
-                        .setMessage("Error -> " + throwable.getMessage())
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Error -> " + throwable.getMessage());
             }
         });
+    }
+    private void showAlert(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

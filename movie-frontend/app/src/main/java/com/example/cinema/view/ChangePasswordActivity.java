@@ -46,11 +46,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
         String currentPassword = editCurrentPassword.getText().toString().trim();
         String newPassword = editNewPassword.getText().toString().trim();
         String confirmPassword = editConfirmPassword.getText().toString().trim();
+        if (currentPassword.isEmpty() || confirmPassword.isEmpty() || newPassword.isEmpty()) {
+            showAlert("Vui lòng nhập đầy đủ thông tin.");
+            return;
+        }
         if (!newPassword.equals(confirmPassword)) {
-            new AlertDialog.Builder(this)
-                    .setMessage("Mật khẩu mới và xác nhận mật khẩu mới không trùng khớp")
-                    .setPositiveButton("OK", null)
-                    .show();
+            showAlert("Mật khẩu mới và xác nhận mật khẩu mới không trùng khớp");
             return;
         }
         int userId = sharedPreferences.getInt("userId", -1);
@@ -68,28 +69,23 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-                        Toast.makeText(getApplicationContext(), "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                        showAlert("Đổi mật khẩu thành công");
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("userPassword", newPassword);
+                        editor.apply();
+
                         finish();
                     } else {
-                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";
-                        new AlertDialog.Builder(ChangePasswordActivity.this)
-                                .setMessage(errorMessage)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
+                        showAlert(errorMessage);
                     }
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-                        new AlertDialog.Builder(ChangePasswordActivity.this)
-                                .setMessage(errorBody)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert(errorBody);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        new AlertDialog.Builder(ChangePasswordActivity.this)
-                                .setMessage("Error: " + e.getMessage())
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert("Error: " + e.getMessage());
                     }
                 }
             }
@@ -97,11 +93,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable throwable) {
                 throwable.printStackTrace();
-                new AlertDialog.Builder(ChangePasswordActivity.this)
-                        .setMessage("Error -> " + throwable.getMessage())
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Error -> " + throwable.getMessage());
             }
         });
+    }
+    private void showAlert(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

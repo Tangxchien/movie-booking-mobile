@@ -82,7 +82,10 @@ public class RegisterActivity extends AppCompatActivity {
         String password = registerPassword.getText().toString();
         String gender = registerMale.isChecked() ? "nam" : "nữ";
         String birthdayStr = registerBirthday.getText().toString();
-
+        if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || birthdayStr.isEmpty()) {
+            showAlert("Vui lòng nhập đầy đủ thông tin.");
+            return;
+        }
         String birthday = null;
         if (!birthdayStr.isEmpty()) {
             try {
@@ -90,10 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                 birthday = inputDateFormat.format(parsedDate);
             } catch (Exception e) {
                 e.printStackTrace();
-                new AlertDialog.Builder(this)
-                        .setMessage("Vui lòng chọn ngày sinh hợp lệ")
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Vui lòng chọn ngày sinh hợp lệ.");
                 return;
             }
         }
@@ -108,26 +108,18 @@ public class RegisterActivity extends AppCompatActivity {
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
-                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Unknown error";
-                        new AlertDialog.Builder(RegisterActivity.this)
-                                .setMessage(errorMessage)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
+                        showAlert(errorMessage);
                     }
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-                        new AlertDialog.Builder(RegisterActivity.this)
-                                .setMessage(errorBody)
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert(errorBody);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        new AlertDialog.Builder(RegisterActivity.this)
-                                .setMessage("Error: " + e.getMessage())
-                                .setPositiveButton("OK", null)
-                                .show();
+                        showAlert("Error: " + e.getMessage());
                     }
                 }
             }
@@ -135,11 +127,14 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable throwable) {
                 throwable.printStackTrace();
-                new AlertDialog.Builder(RegisterActivity.this)
-                        .setMessage("Error -> " + throwable.getMessage())
-                        .setPositiveButton("OK", null)
-                        .show();
+                showAlert("Error -> " + throwable.getMessage());
             }
         });
+    }
+    private void showAlert(String message) {
+        new AlertDialog.Builder(this)
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }
