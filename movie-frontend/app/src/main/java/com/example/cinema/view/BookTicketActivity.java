@@ -55,8 +55,9 @@ public class BookTicketActivity extends AppCompatActivity {
         btnPay.setOnClickListener(v -> {
             if(totalprice == 0){
                 new AlertDialog.Builder(BookTicketActivity.this).setIcon(R.drawable.warning).setPositiveButton("OK", null).setTitle("THANH TOÁN THẤT BẠI").setMessage("Bạn chưa chọn ghế").show();
-            } else
-            bookTicket();
+            } else {
+                bookTicket();
+            }
         });
 
         price = getIntent().getIntExtra("price", 0);

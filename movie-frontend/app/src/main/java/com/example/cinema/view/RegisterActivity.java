@@ -106,8 +106,8 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        startActivity(intent);
+//                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+//                        startActivity(intent);
                         finish();
                     } else {
                         String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";

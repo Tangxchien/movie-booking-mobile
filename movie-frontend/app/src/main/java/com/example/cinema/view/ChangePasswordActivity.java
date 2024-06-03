@@ -69,12 +69,15 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-                        showAlert("Đổi mật khẩu thành công");
+//                        showAlert("Đổi mật khẩu thành công");
+                        new AlertDialog.Builder(ChangePasswordActivity.this)
+                                .setMessage("Đổi mật khẩu thành công")
+                                .setPositiveButton("OK", (dialog, which) -> finish())
+                                .show();
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("userPassword", newPassword);
                         editor.apply();
-
-                        finish();
+//                        finish();
                     } else {
                         String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
                         showAlert(errorMessage);

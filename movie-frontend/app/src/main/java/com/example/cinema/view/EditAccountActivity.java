@@ -165,7 +165,11 @@ public class EditAccountActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-                        showAlert("Cập nhật thông tin thành công");
+//                        showAlert("Cập nhật thông tin thành công");
+                        new AlertDialog.Builder(EditAccountActivity.this)
+                                .setMessage("Cập nhật thông tin thành công")
+                                .setPositiveButton("OK", (dialog, which) -> finish())
+                                .show();
                         // Cập nhật SharedPreferences
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("userName", name);
@@ -175,7 +179,7 @@ public class EditAccountActivity extends AppCompatActivity {
                         editor.putString("userBirthday", finalBirthday);
                         editor.apply();
 
-                        finish();
+//                        finish();
                     } else {
                         String errorMessage = apiResponse != null ? apiResponse.getMessage() : "Lỗi không xác định";
                         showAlert(errorMessage);

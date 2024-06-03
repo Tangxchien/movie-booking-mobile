@@ -71,10 +71,10 @@ public class MovieDetailActivity extends AppCompatActivity {
                 if(ageLimit.equals("0")){
                     tvAgeLimitV.setText("Phim không giới hạn độ tuổi");
                 }
-                else
-                tvAgeLimitV.setText("Phim dành cho khán giả trên " + ageLimit + " tuổi");
-                tvDirectorV.setText(movie.getDirector());
-
+                else {
+                    tvAgeLimitV.setText("Phim dành cho khán giả trên " + ageLimit + " tuổi");
+                    tvDirectorV.setText(movie.getDirector());
+                }
                 List<String> genres = movie.getGenres();
                 StringBuilder genresTextBuilder = new StringBuilder();
                 for (int i = 0; i < genres.size(); i++) {

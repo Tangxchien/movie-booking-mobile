@@ -50,6 +50,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         }
         if (!newPassword.equals(confirmPassword)) {
             showAlert("Mật khẩu mới và xác nhận mật khẩu mới không trùng khớp");
+            return;
         }
 
         ForgotPasswordRequest request = new ForgotPasswordRequest(phone, email, newPassword);
@@ -60,7 +61,6 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ApiResponse apiResponse = response.body();
                     if (apiResponse != null && apiResponse.getStatus().equals("success")) {
-                        showAlert("Mật khẩu đã được đặt lại thành công");
                         new AlertDialog.Builder(ForgetPasswordActivity.this)
                                 .setMessage("Mật khẩu đã được đặt lại thành công")
                                 .setPositiveButton("OK", (dialog, which) -> finish())
